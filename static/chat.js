@@ -16,6 +16,8 @@ form.addEventListener("submit", async (event) => {
   if (!message) return;
 
   appendMessage("user", message);
+  
+
   input.value = "";
   input.disabled = true;
 
@@ -34,6 +36,9 @@ form.addEventListener("submit", async (event) => {
 
     const data = await res.json();
     appendMessage("assistant", data.reply);
+    const tokenDiv = document.createElement("div");
+    tokenDiv.textContent = `Token count: ${data.token_count}`;
+    log.appendChild(tokenDiv);
 
     // TODO (HW1, "token-count display"): if you pick this feature,
     // read a token count from data (once the backend returns one)

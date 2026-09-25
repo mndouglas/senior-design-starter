@@ -50,6 +50,13 @@ def chat():
 
     response_payload = {"reply": reply["content"]}
 
+    token_count = sum(
+        len(message["content"].split())
+        for message in conversation
+    )
+
+    response_payload["token_count"] = token_count
+
     # TODO (HW1, "token-count display"): if you pick this feature,
     # compute a token count for the conversation (a simple whitespace
     # split is a fine approximation, you don't need a real tokenizer)
