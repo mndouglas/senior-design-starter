@@ -1,7 +1,6 @@
 const form = document.getElementById("chat-form");
 const input = document.getElementById("message-input");
 const log = document.getElementById("chat-log");
-
 function appendMessage(role, text) {
   const div = document.createElement("div");
   div.className = `msg ${role}`;
@@ -16,6 +15,8 @@ form.addEventListener("submit", async (event) => {
   if (!message) return;
 
   appendMessage("user", message);
+  
+
   input.value = "";
   input.disabled = true;
 
@@ -34,6 +35,9 @@ form.addEventListener("submit", async (event) => {
 
     const data = await res.json();
     appendMessage("assistant", data.reply);
+    const tokenDiv = document.createElement("div");
+    tokenDiv.textContent = `Token count: ${data.token_count}`;
+    log.appendChild(tokenDiv);
 
     // TODO (HW1, "token-count display"): if you pick this feature,
     // read a token count from data (once the backend returns one)
@@ -44,4 +48,12 @@ form.addEventListener("submit", async (event) => {
     input.disabled = false;
     input.focus();
   }
+});
+
+const clearButton = document.getElementById("clear-button");
+
+clearButton.addEventListener("click", () => {
+  log.innerHTML = "";
+  input.value = "";
+  input.focus();
 });
