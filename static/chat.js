@@ -1,7 +1,6 @@
 const form = document.getElementById("chat-form");
 const input = document.getElementById("message-input");
 const log = document.getElementById("chat-log");
-
 function appendMessage(role, text) {
   const div = document.createElement("div");
   div.className = `msg ${role}`;
@@ -49,4 +48,12 @@ form.addEventListener("submit", async (event) => {
     input.disabled = false;
     input.focus();
   }
+});
+
+const clearButton = document.getElementById("clear-button");
+
+clearButton.addEventListener("click", () => {
+  log.innerHTML = "";
+  input.value = "";
+  input.focus();
 });
